@@ -1,28 +1,36 @@
-<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary">
   <div class="container">
-    <a class="navbar-brand" href="#">Dating App</a>
+    <a class="navbar-brand" routerLink="/">Dating App</a>
 
-    <!-- using signals for persisting values -->
-    @if (accountService.currentUser()){
     <ul class="navbar-nav me-auto mb-2 mb-md-0">
+      <!-- using signals for persisting values -->
+      @if(accountService.currentUser()){
       <li class="nav-item">
-        <a class="nav-link">Matches</a>
+        <!-- "routerLinkActive" is the Angular property which specifies about the link being active or not. "active" is the bootstarp class which can be used to highlight the link. Together they make a condition i.e. when a link is active apply the active class of bootstrap -->
+        <!-- " routerLink="/members" " is method one of navigating-->
+        <a routerLink="/members" routerLinkActive="active" class="nav-link"
+          >Matches</a
+        >
       </li>
       <li class="nav-item">
-        <a class="nav-link">Lists</a>
+        <a routerLink="/lists" routerLinkActive="active" class="nav-link"
+          >Lists</a
+        >
       </li>
       <li class="nav-item">
-        <a class="nav-link">Messages</a>
+        <a routerLink="/messages" routerLinkActive="active" class="nav-link"
+          >Messages</a
+        >
       </li>
+      }
     </ul>
-    }
 
     <!-- using signals for persisting values -->
     @if (accountService.currentUser()) {
     <div dropdown class="dropdown">
-      <a dropdownToggle class="dropdown-toggle text-light text-decoration-none"
-        >Welcome User</a
-      >
+      <a dropdownToggle class="dropdown-toggle text-light text-decoration-none">
+        Welcome {{accountService.currentUser()?.username | titlecase}}
+      </a>
       <div *dropdownMenu class="dropdown-menu">
         <a class="dropdown-item">Edit Profile</a>
         <div class="dropdown-divider"></div>
