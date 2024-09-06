@@ -4,6 +4,8 @@ import { NavigationExtras, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { catchError } from 'rxjs';
 
+//errorInterceptor deals in position when a request is coming back from API to the angular client 
+//[all functions are defined after return next]
 //The interceptors can be used in app.config
 //provideHttpClient(withInterceptors([errorInterceptor]))
 export const errorInterceptor: HttpInterceptorFn = (req, next) => {

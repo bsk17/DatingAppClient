@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit {
   users: any;
 
   ngOnInit(): void {
-    this.getUsers();
+    // this.getUsers();
   }
 
   registerToggle() {
@@ -34,14 +34,14 @@ export class HomeComponent implements OnInit {
   }
 
   //get all users directly without using services as intermediatary layer
-  getUsers() {
-    this.http.get('https://localhost:5001/api/users').subscribe({
-      next: response => {
-        this.users = response;
-        console.log(this.users);
-      },
-      error: error => console.log(error),
-      complete: () => console.log('getUser Request has completed')
-    });
-  }
+  // getUsers() {
+  //   this.http.get('https://localhost:5001/api/users').subscribe({
+  //     next: response => {
+  //       this.users = response;
+  //       console.log(this.users);
+  //     },
+  //     error: error => console.log(error),
+  //     complete: () => console.log('getUser Request has completed')
+  //   });
+  // }
 }
