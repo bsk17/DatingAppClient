@@ -1,0 +1,110 @@
+@if (member) {
+<div class="row">
+  <div class="col-4">
+    <h1>Your Profile</h1>
+  </div>
+  <div class="col-8">
+    <!-- We want to show an alert only when some editing has been done in the form -->
+    @if (editForm.dirty) {
+    <div class="alert alert-info pb-0">
+      <p>
+        <strong>Information: </strong>
+        You have made changes. Any unsaved changes will be lost.
+      </p>
+    </div>
+    }
+  </div>
+  <div class="col-4">
+    <div class="card">
+      <img
+        class="card-img img-thumbnail"
+        src="{{ member.photoUrl || './assets/user.png' }}"
+        alt="{{ member.knownAs }}"
+      />
+      <div class="card-body">
+        <div>
+          <strong>Location:</strong>
+          <p>{{ member.city }}, {{ member.country }}</p>
+        </div>
+        <div>
+          <strong>Age:</strong>
+          <p>{{ member.age }}</p>
+        </div>
+        <div>
+          <strong>Last Active:</strong>
+          <p>{{ member.lastActive }}</p>
+        </div>
+        <div>
+          <strong>Member Since:</strong>
+          <p>{{ member.created }}</p>
+        </div>
+      </div>
+      <div class="card-footer">
+        <!-- we want to disable the button to save if the form is not edited -->
+        <button
+          [disabled]="!editForm.dirty"
+          form="editForm"
+          type="submit"
+          class="btn btn-success col-12"
+        >
+          Save Changes
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="col-8">
+    <tabset class="member-tabset">
+      <tab heading="About {{ member.knownAs }}">
+        <!-- id='editForm' is added because button is not inside form and we have to tell button which form it has to act as submit button for-->
+        <!-- #editForm='ngForm' is added for template based forms-->
+        <form id="editForm" #editForm="ngForm" (ngSubmit)="updateMember()">
+          <h4 class="mt-2">Description</h4>
+          <textarea
+            class="form-control"
+            name="introduction"
+            [(ngModel)]="member.introduction"
+            rows="6"
+          ></textarea>
+
+          <h4 class="mt-2">Looking for</h4>
+          <textarea
+            class="form-control"
+            name="lookingFor"
+            [(ngModel)]="member.lookingFor"
+            rows="6"
+          ></textarea>
+
+          <h4 class="mt-2">Interests</h4>
+          <textarea
+            class="form-control"
+            name="interests"
+            [(ngModel)]="member.interests"
+            rows="6"
+          ></textarea>
+
+          <h4 class="mt-2">Location Details</h4>
+
+          <div class="d-flex align-items-center mt-2">
+            <label>City: </label>
+            <input
+              type="text"
+              [(ngModel)]="member.city"
+              class="form-control mx-2"
+              name="city"
+            />
+
+            <label>Country: </label>
+            <input
+              type="text"
+              [(ngModel)]="member.country"
+              class="form-control mx-2"
+              name="country"
+            />
+          </div>
+        </form>
+      </tab>
+      <tab heading="Edit Photos"> </tab>
+    </tabset>
+  </div>
+</div>
+}
